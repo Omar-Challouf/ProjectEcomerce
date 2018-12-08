@@ -1,0 +1,20 @@
+package com.insat.service;
+
+import java.util.List;
+
+import com.insat.model.Product;
+
+public interface ProductService {
+	
+	List<Product> getAll() ; 
+	
+	Product getById(Long id); 
+ 
+	List<Product> getAllById(List<Long> ids) ;
+
+	List<Product> getByName(String name);
+
+	List<Product> getProductsByCategory(int id);
+
+	List<Product> getProductWithDiscount(); 
+}

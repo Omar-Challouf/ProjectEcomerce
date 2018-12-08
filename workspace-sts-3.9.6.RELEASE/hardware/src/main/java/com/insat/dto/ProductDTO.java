@@ -1,0 +1,198 @@
+package com.insat.dto;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.validation.constraints.NotBlank;
+
+/**
+ * The Class Product.
+ *
+ * @author HamdiBouslah on 21 nov. 2018
+ */
+public class ProductDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2853966720598435884L;
+
+	private Long id;
+
+	/** The name. */
+
+	private String name;
+
+	
+	private String categoryName;
+	
+	
+	private CategoryDTO categoryDTO ;
+    
+	/** The prix. */
+	private Long prix;
+
+	/** The disponible. */
+	private Boolean disponible;
+
+	/** The description. */
+	private String description;
+
+	/** The date sortie. */
+	private Date dateSortie;
+	private String path_url_image;
+	private String remise;
+
+	/**
+	 * Instantiates a new note.
+	 */
+	public ProductDTO() {
+		/*
+		 * 
+		 */
+	}
+
+	public ProductDTO(Long id, @NotBlank String name, String categoryName, Long prix, Boolean disponible,
+			String description, Date dateSortie, String path, String remise) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.categoryName = categoryName;
+		this.prix = prix;
+		this.disponible = disponible;
+		this.description = description;
+		this.dateSortie = dateSortie;
+		this.path_url_image = path;
+		this.remise= remise;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the categoryName
+	 */
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	/**
+	 * @param categoryName the categoryName to set
+	 */
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	/**
+	 * @return the prix
+	 */
+	public Long getPrix() {
+		return prix;
+	}
+
+	/**
+	 * @param prix the prix to set
+	 */
+	public void setPrix(Long prix) {
+		this.prix = prix;
+	}
+
+	/**
+	 * @return the disponible
+	 */
+	public Boolean getDisponible() {
+		return disponible;
+	}
+
+	/**
+	 * @param disponible the disponible to set
+	 */
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the dateSortie
+	 */
+	public Date getDateSortie() {
+		return dateSortie;
+	}
+
+	/**
+	 * @param dateSortie the dateSortie to set
+	 */
+	public void setDateSortie(Date dateSortie) {
+		this.dateSortie = dateSortie;
+	}
+
+	/**
+	 * @return the categoryDTO
+	 */
+	public CategoryDTO getCategoryDTO() {
+		return categoryDTO;
+	}
+
+	/**
+	 * @param categoryDTO the categoryDTO to set
+	 */
+	public void setCategoryDTO(CategoryDTO categoryDTO) {
+		this.categoryDTO = categoryDTO;
+	}
+	
+	public String getPathUrlImage() {
+		return path_url_image;
+	}
+	public void setPathUrlImage(String Path) {
+		this.path_url_image=Path;
+	}
+	
+	public String getRemise() {
+		return remise;
+	}
+	public void setRemise(String remise) {
+		this.remise=remise;
+	}
+
+	
+	
+
+}

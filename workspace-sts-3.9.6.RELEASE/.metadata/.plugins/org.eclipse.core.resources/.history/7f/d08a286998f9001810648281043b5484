@@ -1,0 +1,144 @@
+package com.insat.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.insat.dto.CategoryDTO;
+import com.insat.dto.ProductDTO;
+import com.insat.model.Product;
+import com.insat.service.ProductService;
+@CrossOrigin(origins ="http://localhost:4200")
+@RestController
+@RequestMapping("/api")
+public class ProductController {
+	
+	@Autowired
+	private ProductService productService ;
+	
+	
+	
+	@GetMapping("/products")
+	public List<ProductDTO> getAll(){
+		List<Product> products =  productService.getAll() ;
+		List<ProductDTO> productsDTO = new ArrayList<>();
+		products.forEach(product -> { 
+			
+			ProductDTO productDTO = new ProductDTO(product.getId(), 
+					product.getName(), 
+					product.getCategory().getName(),
+					product.getPrix(),
+					product.getDisponible(),
+					product.getDescription(),
+					product.getDateSortie(),
+					product.getPathUrlImage(),
+					product.getRemise()); 
+			
+			productDTO.setCategoryDTO(new CategoryDTO(product.getCategory().getId(),product.getCategory().getName()));
+			productsDTO.add(productDTO);
+		});
+		
+		return productsDTO;
+	}
+	
+	@GetMapping("/product/{id}")
+	public ProductDTO getById(@PathVariable(value = "id") Long id) {
+		Product product = productService.getById(id);
+		
+		ProductDTO productDTO = new ProductDTO(product.getId(), 
+				product.getName(), 
+				product.getCategory().getName(),
+				product.getPrix(),
+				product.getDisponible(),
+				product.getDescription(),
+				product.getDateSortie(),
+				product.getPathUrlImage(),
+				product.getRemise());
+		
+		return productDTO;
+	}
+	@GetMapping("/cherche/{name}")
+	public List<ProductDTO> getByName(@PathVariable(value = "name") String name) {
+		List<Product> products = productService.getByName(name);
+		List<ProductDTO> productsDTO = new ArrayList<>();
+		products.forEach(product -> { 
+			
+			ProductDTO productDTO = new ProductDTO(product.getId(), 
+					product.getName(), 
+					product.getCategory().getName(),
+					product.getPrix(),
+					product.getDisponible(),
+					product.getDescription(),
+					product.getDateSortie(),
+					product.getPathUrlImage(),
+					product.getRemise());
+			
+			productDTO.setCategoryDTO(new CategoryDTO(product.getCategory().getId(),product.getCategory().getName()));
+			productsDTO.add(productDTO);
+		});
+		
+		return productsDTO;
+	
+	}
+	
+	
+	
+	
+	@GetMapping("/ProductsByCategory/{id}")
+	public List<ProductDTO> getProductsByCategory(@PathVariable(value = "id") int id) {
+		List<Product> products = productService.getProductsByCategory(id);
+		List<ProductDTO> productsDTO = new ArrayList<>();
+		products.forEach(product -> { 
+			
+			ProductDTO productDTO = new ProductDTO(product.getId(), 
+					product.getName(), 
+					product.getCategory().getName(),
+					product.getPrix(),
+					product.getDisponible(),
+					product.getDescription(),
+					product.getDateSortie(),
+					product.getPathUrlImage(),
+					product.getRemise());
+			
+			productDTO.setCategoryDTO(new CategoryDTO(product.getCategory().getId(),product.getCategory().getName()));
+			productsDTO.add(productDTO);
+		});
+		
+		return productsDTO;
+	
+	}
+	
+	
+	@GetMapping("/remise")
+	public List<ProductDTO> getProductWithDiscount {
+		List<Product> products = productService.getProductWithDiscount();
+		List<ProductDTO> productsDTO = new ArrayList<>();
+		products.forEach(product -> { 
+			
+			ProductDTO productDTO = new ProductDTO(product.getId(), 
+					product.getName(), 
+					product.getCategory().getName(),
+					product.getPrix(),
+					product.getDisponible(),
+					product.getDescription(),
+					product.getDateSortie(),
+					product.getPathUrlImage(),
+					product.getRemise());
+			
+			productDTO.setCategoryDTO(new CategoryDTO(product.getCategory().getId(),product.getCategory().getName()));
+			productsDTO.add(productDTO);
+		});
+		
+		return productsDTO;
+	
+	}
+	
+	
+	
+}

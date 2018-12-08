@@ -1,0 +1,286 @@
+package com.insat.model;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+/**
+ * The Class Product.
+ *
+ * @author HamdiBouslah on 21 nov. 2018
+ */
+@Entity
+@Table(name = "product")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
+public class Product {
+
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	/** The name. */
+	@NotBlank
+	private String name;
+
+	/** The category. */
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+	private Category category;
+    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH}, mappedBy = "products")
+    private List<Commande> commandes ; 
+
+	/** The prix. */
+	private Long prix;
+
+	/** The disponible. */
+	private Boolean disponible;
+
+	/** The description. */
+	private String description;
+
+	/** The date sortie. */
+	private Date dateSortie;
+
+	/** The created at. */
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	private Date createdAt;
+
+	/** The updated at. */
+	@Column(nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	private Date updatedAt;
+	private String path_url_image; 
+	private String remise;
+	/**
+	 * Instantiates a new note.
+	 */
+	public Product() {
+		/*
+		 * 
+		 */
+	}
+
+	public String getRemise() {
+		return remise;
+	}
+	public void setRemise(String remise) {
+		this.remise=remise;
+	}
+	
+	public String getPathUrlImage() {
+		return path_url_image;
+	}
+	public void setPathUrlImage(String Path) {
+		this.path_url_image=Path;
+	}
+
+	
+	/**
+	 * @return the name
+	 */
+	
+	public String getName() {
+		return name;
+	}
+
+
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	/**
+	 * @return the category
+	 */
+	public Category getCategory() {
+		return category;
+	}
+
+
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+
+
+	/**
+	 * @return the prix
+	 */
+	public Long getPrix() {
+		return prix;
+	}
+
+
+
+	/**
+	 * @param prix the prix to set
+	 */
+	public void setPrix(Long prix) {
+		this.prix = prix;
+	}
+
+
+
+	/**
+	 * @return the disponible
+	 */
+	public Boolean getDisponible() {
+		return disponible;
+	}
+
+
+
+	/**
+	 * @param disponible the disponible to set
+	 */
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
+	}
+
+
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+	/**
+	 * @return the dateSortie
+	 */
+	public Date getDateSortie() {
+		return dateSortie;
+	}
+
+
+
+	/**
+	 * @param dateSortie the dateSortie to set
+	 */
+	public void setDateSortie(Date dateSortie) {
+		this.dateSortie = dateSortie;
+	}
+
+	
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	/**
+	 * @return the commandes
+	 */
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+
+	/**
+	 * @param commandes the commandes to set
+	 */
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
+
+
+	/**
+	 * Gets the created at.
+	 *
+	 * @return the created at
+	 */
+	public Date getCreatedAt() {
+
+		return createdAt;
+	}
+
+	/**
+	 * Sets the created at.
+	 *
+	 * @param createdAt the new created at
+	 */
+	public void setCreatedAt(Date createdAt) {
+
+		this.createdAt = createdAt;
+	}
+
+	/**
+	 * Gets the updated at.
+	 *
+	 * @return the updated at
+	 */
+	public Date getUpdatedAt() {
+
+		return updatedAt;
+	}
+
+	/**
+	 * Sets the updated at.
+	 *
+	 * @param updatedAt the new updated at
+	 */
+	public void setUpdatedAt(Date updatedAt) {
+
+		this.updatedAt = updatedAt;
+	}
+
+}
